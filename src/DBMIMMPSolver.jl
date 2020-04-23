@@ -2,7 +2,7 @@ function DBMIMMPSolver(A,b,C,d,VariableDef;XLB=[],XUB=[],MU = .9,EnhancedUB = 0,
                 rEPS = .000001, aEPS = .000001)
     ### Initialization
     t0 = time_ns();
-
+    nVar = size(A)[2];
     if XLB == []
         XLB = -1e9*ones(nVar)
     end
