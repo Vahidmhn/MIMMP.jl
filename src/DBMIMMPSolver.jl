@@ -98,7 +98,7 @@ function DBMIMMPSolver(A,b,C,d,VariableDef;XLB=[],XUB=[],MU = .9,EnhancedUB = 0,
     elseif VariableDef[1] == nVar
         OptX = X_Tilde;
         Time = (time_ns() - t0)/1e9
-    elseif all(isinteger.(X_Tilde[VariableDef[1]+1:end]))
+    elseif all(isinteger.(X_Tilde[Int(VariableDef[1]+1):end]))
         # We get the optimal solution
         println("The relaxed solution was optimal")
         OptX = X_Tilde;
