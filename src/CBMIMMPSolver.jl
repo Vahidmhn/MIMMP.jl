@@ -26,7 +26,7 @@ function CBMIMMPSolver(A,b,C,d,VariableDef;XLB=[],XUB=[], rEPS = 1e-6,aEPS = 1e-
     for i = 1:nObj
         ObjOrd = [j for j = i:i+nObj-1]
         ObjOrd[ObjOrd .> nObj] = ObjOrd[ObjOrd .> nObj]-nObj
-        ObjVal, XVal = ArgLexMin(A,b,C,d,XLB,XUB,VariableDef,ObjOrd; TimeLimit = TimeLim-(time_ns() - t0)/1e9)
+        ObjVal, Var = ArgLexMin(A,b,C,d,XLB,XUB,VariableDef,ObjOrd; TimeLimit = TimeLim-(time_ns() - t0)/1e9)
 
         if (TimeLim-(time_ns() - t0)/1e9) < 0.001;
             println("Time Limit reached! The solution is not a proved optimal")
@@ -36,7 +36,7 @@ function CBMIMMPSolver(A,b,C,d,VariableDef;XLB=[],XUB=[], rEPS = 1e-6,aEPS = 1e-
         PayoffTable[i,:] = ObjVal
         if GUB >= prod(PayoffTable[i,:])
             GUB = prod(PayoffTable[i,:])
-            OptX = Var
+            OptX = copy(Var)
         end
     end
     GLB = prod(YI);
